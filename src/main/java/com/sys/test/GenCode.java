@@ -15,17 +15,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GenCode {
-    public final static String DB_URL = "jdbc:mysql://172.16.1.44:3306/baoli-pro0814?useUnicode=true&characterEncoding=utf-8&useSSL=false&zeroDateTimeBehavior=convertToNull";
+    public final static String DB_URL = "jdbc:mysql://172.16.1.44:3306/okex?useUnicode=true&characterEncoding=utf-8&useSSL=false&zeroDateTimeBehavior=convertToNull";
     public final static String DB_USERNAME = "gcp_dev";
     public final static String DB_PASSWORD = "abD&k4mhl";
 
-    public final static String TABLE_PREFIX = "t_";
+    public final static String TABLE_PREFIX = "sys_";
     public final static String PN_PARENT = "com.sys";
     public final static String MODULE_NAME = "";
     public final static String author = "zhongqian";
 
     private static String[] tables = {
-            "t_oil_org"
+            "sys_resources",
+            "sys_role",
+            "sys_role_resources",
+            "sys_user",
+            "sys_user_role"
     };
 
     public static void main(String[] args) {

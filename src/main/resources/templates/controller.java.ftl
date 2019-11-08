@@ -16,8 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import lombok.extern.java.Log;
 import com.sys.comm.response.CommonReturnType;
-import com.sys.controller.convert.*;
-import com.sys.controller.vo.*;
+import com.sys.web.controller.convert.*;
+import com.sys.web.controller.vo.*;
 import com.sys.entity.*;
 import com.sys.service.*;
 import java.util.*;
@@ -69,7 +69,7 @@ public class ${table.controllerName}  extends BaseController{
     public CommonReturnType<Object> add(@RequestBody ${voCls} inputVO) {
         CommonReturnType<Object> ret = null;
 
-        this.${comIns}Service.saveOrUpdate(inputVO);
+        this.${comIns}Service.saveOrUpdate(${voConvertCls}.to${entity}(inputVO));
 
         ret = CommonReturnType.createSuccess(null);
         return ret;
@@ -79,7 +79,7 @@ public class ${table.controllerName}  extends BaseController{
     /**
      * 详情
      */
-/*
+
     @ApiOperation(value = "详情", httpMethod = "POST")
     @ApiResponse(code = 200, message = "success", response = CommonReturnType.class)
     @PostMapping(value="/view/{id}")
@@ -92,39 +92,22 @@ public class ${table.controllerName}  extends BaseController{
         ret = CommonReturnType.createSuccess(voObj);
 
         return ret;
-    }*/
-
-    /**
-     * 分页列表
-     */
-    /*
-    @ApiOperation(value = "分页列表", httpMethod = "POST")
-    @ApiResponse(code = 200, message = "success", response = CommonReturnType.class)
-    @PostMapping(value="/list")
-    public CommonReturnType<${voCls}> list(@RequestBody ${voCls} inputVO) {
-        CommonReturnType<${voCls}> ret = null;
-        final ${voCls} demoVO = new ${voCls}();
-        ret = CommonReturnType.createSuccess(demoVO);
-        return ret;
-    }*/
-
-
-    /**
-     * 查询列表
-     */
-    @ApiOperation(value = "查询列表", httpMethod = "POST")
-    @ApiResponse(code = 200, message = "success", response = CommonReturnType.class)
-    @PostMapping(value="/list")
-    public CommonReturnType<List<${voCls}>> list(@RequestBody RecordReqVO inputVO) {
-        CommonReturnType<List<${voCls}>> ret = null;
-
-        final List<${entity}> doList = this.${comIns}Service.list();
-        List<${voCls}> list = ${voConvertCls}.from(doList);
-
-        ret = CommonReturnType.createSuccess(list);
-
-        return ret;
     }
+
+        /**
+        * 分页列表
+        */
+ /*       @ApiOperation(value = "分页列表", httpMethod = "POST")
+        @ApiResponse(code = 200, message = "success", response = CommonReturnType.class)
+        @PostMapping(value="/list")
+        public CommonReturnType<TableDataInfo<${voCls}>> list(@RequestBody PageReq<${voCls}> inputVO) {
+            TableDataInfo<${voCls}> tableDataInfo = this.${comIns}Service.selectPage(inputVO.getData());
+            ret = CommonReturnType.createSuccess(demoVO);
+            return ret;
+        }
+*/
+
+
 
 }
 </#if>
